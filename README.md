@@ -1,5 +1,8 @@
-# MYSQL-Csharp-Video-APP
-本项目基于MYSQL数据库和C#实现简单视频平台  This project a simple video app based on MYSQL and C#
+# 基于 MySQL 数据库和 C# 实现的简单视频用户交互界面  
+A Simple Video User Interaction Interface Based on MySQL and C#
+
+本项目使用 MySQL 数据库配合 C# 编程语言，实现一个具备基本用户注册、视频上传、评论、点赞、关注等功能的视频平台交互系统。
+
 
 ## 数据库连接配置
 
