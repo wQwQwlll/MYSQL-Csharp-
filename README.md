@@ -9,9 +9,10 @@
 
 ```csharp
 string connStr = "Data Source=localhost;Initial Catalog=videoapp;Integrated Security=True;";
+```
 改为：
+```csharp
 string connStr = "Data Source=你的数据库地址;Initial Catalog=你的数据库名称;Integrated Security=True;";
-
 ```
 
 ## 数据库设计
