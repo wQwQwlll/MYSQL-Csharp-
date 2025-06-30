@@ -1,46 +1,76 @@
 # MYSQL-Csharp-Video-APP
 本项目基于MYSQL数据库和C#实现简单视频平台  This project a simple video app based on MYSQL and C#
 
-本项目一共使用如下6个表：
-1、用户表（User）
-属性名	        数据类型	     必填字段	  允许空值	     属性描述	      备注
-user_id	      INT	           是	         否	       用户编号	   主码，自增
-username	    VARCHAR(50)	   是	         否	       用户名	        唯一
-password	    VARCHAR(100)	 是	         否	       登录密码	    加密存储
-email	        VARCHAR(100)	 是	         否	       邮箱地址	   唯一，可用于登录
-avatar_url	  VARCHAR(200)	 否	         是	       用户头像地址	
 
-2、视频表（Video）
-属性名	       数据类型	    必填字段	   允许空值	     属性描述	       备注
-video_id	   INT	           是	       否	         视频编号	     主码，自增
-title	       VARCHAR(100)	   是	       否	         视频标题	
-user_id	     INT	           是	       否	       上传者用户ID	  外码，引用 User(user_id)
 
-3、评论表（Comment）
-属性名	       数据类型	    必填字段	  允许空值	      属性描述	         备注
-comment_id	 INT	           是	       否       	评论编号	       主码，自增
-content	     TEXT	           是	       否       	评论内容	
-post_time	   DATETIME  	     是	       否	        评论时间      	默认当前时间
-user_id	     INT	           是	       否	        评论者ID	      外码，引用 User(user_id)
-video_id	   INT	           是	       否	        所属视频ID    	外码，引用 Video(video_id)
-parent_id	   INT	           否	       是	        父评论ID	      外码，引用 Comment(comment_id)，可为 null
+## 数据库设计
 
-4、点赞表（Like）
-属性名        	数据类型    	必填字段 	允许空值     	属性描述         	备注
-like_num	    INT	          是	      否	        点赞数量	        主码，自增
-user_id      	INT         	是	      否	        点赞用户ID	      外码，引用 User(user_id)
-video_id	    INT	          是	      否	        点赞视频ID	      外码，引用 Video(video_id)
+本项目一共使用如下 6 个表：
 
-5、观看记录表（WatchHistory）
-属性名        	数据类型	   必填字段	  允许空值	      属性描述         	备注
-history_id	  INT	          是	       否	        记录编号	        主码，自增
-user_id	      INT	          是	       否	        用户ID	        外码，引用 User(user_id)
-video_id	    INT	          是	       否	        视频ID	        外码，引用 Video(video_id)
+---
 
-6、关注表（Follow）
-属性名	        数据类型	   必填字段	  允许空值	      属性描述         	备注
-follower_num	INT	          是	       否	        关注数	         主码，自增
-follower_id  	INT	          是	       否        	关注者ID	       外码，引用 User(user_id)
-followee_id	  INT	          是	       否	        被关注用户ID	   外码，引用 User(user_id)
-follow_time	  DATETIME	    是	       否       	关注时间	       默认当前时间
+### 1. 用户表（User）
+
+| 属性名     | 数据类型     | 必填字段 | 允许空值 | 属性描述     | 备注             |
+|------------|--------------|----------|----------|--------------|------------------|
+| user_id    | INT          | 是       | 否       | 用户编号     | 主码，自增       |
+| username   | VARCHAR(50)  | 是       | 否       | 用户名       | 唯一             |
+| password   | VARCHAR(100) | 是       | 否       | 登录密码     | 加密存储         |
+| email      | VARCHAR(100) | 是       | 否       | 邮箱地址     | 唯一，可用于登录 |
+| avatar_url | VARCHAR(200) | 否       | 是       | 用户头像地址 |                  |
+
+---
+
+### 2. 视频表（Video）
+
+| 属性名   | 数据类型     | 必填字段 | 允许空值 | 属性描述     | 备注                        |
+|----------|--------------|----------|----------|--------------|-----------------------------|
+| video_id | INT          | 是       | 否       | 视频编号     | 主码，自增                 |
+| title    | VARCHAR(100) | 是       | 否       | 视频标题     |                             |
+| user_id  | INT          | 是       | 否       | 上传者用户ID | 外码，引用 User(user_id)   |
+
+---
+
+### 3. 评论表（Comment）
+
+| 属性名     | 数据类型 | 必填字段 | 允许空值 | 属性描述     | 备注                                          |
+|------------|----------|----------|----------|--------------|-----------------------------------------------|
+| comment_id | INT      | 是       | 否       | 评论编号     | 主码，自增                                   |
+| content    | TEXT     | 是       | 否       | 评论内容     |                                               |
+| post_time  | DATETIME | 是       | 否       | 评论时间     | 默认当前时间                                 |
+| user_id    | INT      | 是       | 否       | 评论者ID     | 外码，引用 User(user_id)                     |
+| video_id   | INT      | 是       | 否       | 所属视频ID   | 外码，引用 Video(video_id)                   |
+| parent_id  | INT      | 否       | 是       | 父评论ID     | 外码，引用 Comment(comment_id)，可为 null   |
+
+---
+
+### 4. 点赞表（Like）
+
+| 属性名   | 数据类型 | 必填字段 | 允许空值 | 属性描述    | 备注                        |
+|----------|----------|----------|----------|-------------|-----------------------------|
+| like_num | INT      | 是       | 否       | 点赞数量    | 主码，自增                 |
+| user_id  | INT      | 是       | 否       | 点赞用户ID  | 外码，引用 User(user_id)   |
+| video_id | INT      | 是       | 否       | 点赞视频ID  | 外码，引用 Video(video_id) |
+
+---
+
+### 5. 观看记录表（WatchHistory）
+
+| 属性名     | 数据类型 | 必填字段 | 允许空值 | 属性描述  | 备注                        |
+|------------|----------|----------|----------|-----------|-----------------------------|
+| history_id | INT      | 是       | 否       | 记录编号  | 主码，自增                 |
+| user_id    | INT      | 是       | 否       | 用户ID    | 外码，引用 User(user_id)   |
+| video_id   | INT      | 是       | 否       | 视频ID    | 外码，引用 Video(video_id) |
+
+---
+
+### 6. 关注表（Follow）
+
+| 属性名       | 数据类型 | 必填字段 | 允许空值 | 属性描述       | 备注                        |
+|--------------|----------|----------|----------|----------------|-----------------------------|
+| follower_num | INT      | 是       | 否       | 关注数         | 主码，自增                 |
+| follower_id  | INT      | 是       | 否       | 关注者ID       | 外码，引用 User(user_id)   |
+| followee_id  | INT      | 是       | 否       | 被关注用户ID   | 外码，引用 User(user_id)   |
+| follow_time  | DATETIME | 是       | 否       | 关注时间       | 默认当前时间               |
+
 
