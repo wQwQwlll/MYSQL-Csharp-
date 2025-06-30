@@ -1,6 +1,12 @@
 # MYSQL-Csharp-Video-APP
 本项目基于MYSQL数据库和C#实现简单视频平台  This project a simple video app based on MYSQL and C#
 
+如果想要使用本项目，请更改数据库地址变量：
+由
+string connStr = "Data Source=localhost;Initial Catalog=videoapp;Integrated Security=True;";
+依据你的数据库地址及名称改为
+string connStr = "Data Source=你的数据库地址;Initial Catalog=你的数据库名称;Integrated Security=True;";
+并使用createtables.sql创建数据库
 
 
 ## 数据库设计
